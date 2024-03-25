@@ -12,7 +12,7 @@ export class ArticleController {
 
       const response = await articleService.create(data);
 
-      return res.status(201).json(response._id);
+      return res.status(201).json(response);
     } catch (error) {
       if (error instanceof BadRequest || error instanceof Conflict) {
         return res.status(error.status).json({ error: error.message });

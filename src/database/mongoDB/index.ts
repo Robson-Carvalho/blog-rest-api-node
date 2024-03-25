@@ -5,6 +5,7 @@ require("dotenv").config({
 
 interface IMongooseClient {
   connect: () => Promise<void>;
+  disconnect: () => Promise<void>;
 }
 
 const URI = process.env.MONGODB_URL as string;
@@ -23,5 +24,8 @@ export class MongooseClient implements IMongooseClient {
       console.error("Error connecting Database instance:", error);
       throw new Error("Failed to connect to database");
     }
+  }
+  async disconnect(): Promise<void> {
+    await mongoose.disconnect();
   }
 }
