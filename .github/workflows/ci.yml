@@ -25,4 +25,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - run: npm install && npm run test
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        env:
+          MONGODB_URL: ${{ secrets.MONGODB_URL }} # Define a variável de ambiente para o MongoDB URL
+        run: npm test
