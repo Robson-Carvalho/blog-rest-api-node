@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x, 20.x]
+        node-version: [16.x, 18.x, 20.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -25,4 +25,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - run: npm install && ls -la
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        env:
+          MONGODB_URL: ${{ secrets.MONGODB_URL }} # Define a variável de ambiente para o MongoDB URL
+        run: npm run test
